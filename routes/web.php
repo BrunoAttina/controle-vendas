@@ -12,3 +12,5 @@
 */
 
 Route::get('/', 'VendasController@index')->name('listar_series');
+Route::get('/produtos', 'VendasController@produtos');
+Route::get('/clientes', 'VendasController@clientes');
