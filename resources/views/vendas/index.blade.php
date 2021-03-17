@@ -36,14 +36,14 @@
 		</div>
 		<div class="form-group mx-sm-3 mb-2">
 			<label for="inputPassword2" class="sr-only">Valor</label>
-			<input type="number" class="form-control" placeholder="Valor" name="valor">
+			<input type="text" class="form-control" placeholder="Valor" name="valor">
 		</div>
 		<button type="submit" class="btn btn-primary mb-2">Salvar</button>
 	</form>
 
 	<ul class="list-group">
 	@foreach($vendas as $venda)
-		<li class="list-group-item d-flex justify-content-between align-items-center">{{ $venda->id }} <?php echo $venda->created_at;?> 
+		<li class="list-group-item d-flex justify-content-between align-items-center">{{ $venda->id }} <?php echo $venda->created_at.$venda->valor;?> 
 			<form method="post" action="/series/remover/{{$venda->id}}" 
 				onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($venda->nome) }}?')"> <!--addslashes função que faz ignorar " ' " no nome-->
 				@csrf
