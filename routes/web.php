@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', 'VendasController@index')->name('listar_series');
-Route::get('/produtos', 'VendasController@produtos');
-Route::get('/clientes', 'VendasController@clientes');
+Route::get('/', 'VendasController@index')->name('vendas');
+Route::get('/clientes', 'VendasController@clientes')->name('clientes');
+Route::get('/produtos', 'VendasController@produtos')->name('produtos');
+
+Route::post('/', 'VendasController@storeVendas');
+Route::post('/clientes', 'VendasController@storeClientes');
+Route::post('/produtos', 'VendasController@storeProdutos');
+
+
