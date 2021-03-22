@@ -42,6 +42,7 @@
 	</form>
 
 	<ul class="list-group">
+
 	@foreach($vendas as $venda)
 		<li class="list-group-item d-flex justify-content-between align-items-center">{{ $venda->id }} <?php echo $venda->created_at.$venda->valor;?> 
 			<form method="post" action="/series/remover/{{$venda->id}}" 
@@ -52,6 +53,8 @@
 			</form>
 		</li>
 	@endforeach
+	{{var_dump($vendas[1])}}
+
 	</ul>
 
 
