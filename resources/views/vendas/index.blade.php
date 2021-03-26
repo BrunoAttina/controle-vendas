@@ -41,126 +41,71 @@
 		<button type="submit" class="btn btn-primary mb-2">Salvar</button>
 	</form>
 
-	<ul class="list-group">
-
-	@foreach($vendas as $venda)
-		<li class="list-group-item d-flex justify-content-between align-items-center">{{ $venda->id }} <?php echo $venda->created_at.$venda->valor.$venda->fkCliente;?> 
-			<form method="post" action="/series/remover/{{$venda->id}}" 
-				onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($venda->nome) }}?')"> <!--addslashes função que faz ignorar " ' " no nome-->
-				@csrf
-				@method("DELETE")
-				<button class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
-			</form>
-		</li>
-	@endforeach
-	{{var_dump($vendas[1])}}
-
-	</ul>
-
 
 	<div id="accordion">
+	<?php $contagem = 0;?>
 	@foreach($clientes as $cliente)
+	<?php $contagem++;?>
 	  <div class="card">
-	    <div class="card-header" id="headingOne">
+	    <div class="card-header" id="heading{{$contagem}}">
 	      <h5 class="mb-0">
-	        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+	        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse{{$contagem}}" aria-expanded="false" aria-controls="collapse{{$contagem}}">
 	        	{{$cliente->nome}}
 	        </button>
 	      </h5>
 	    </div>
 
-	    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">      
+	    <div id="collapse{{$contagem}}" class="collapse" aria-labelledby="heading{{$contagem}}" data-parent="#accordion">      
 			<div class="card-body">
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Nome</th>
+							<th scope="col">Feita em:</th>
 							<th scope="col">Produto</th>
+							<th scope="col">Quantidade</th>
 							<th scope="col">Valor</th>
 							<th scope="col">?</th>
+							<th scope="col"></th>
+
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($vendas as $venda)
 							@if($venda->fkCliente == $cliente->id)
 							<tr>
-								<th scope="row">1</th>
-								<td>{{$cliente->nome}}</td>
-								<td>{{$venda->produto}}</td>
+								<td>{{$venda->created_at}}</th>
+								@foreach($produtos as $produto)
+									@if($venda->fkProduto == $produto->id)
+										<td>{{$produto->nome}}</td>
+									@endif
+								@endforeach
+								<td>{{$venda->qtd}}</th>
 								<td>{{$venda->valor}}</td>
 								<td></td>
+								<td>
+									<form method="post" action="/remover/{{$venda->id}}" 
+										onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($venda->nome) }}?')"> <!--addslashes função que faz ignorar " ' " no nome-->
+										@csrf
+										@method("DELETE")
+										<button class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+									</form>
+								</td>
 							</tr>
 							@endif
 						@endforeach
+							<tr>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								<th scope="col">Valor total: R$0,00</th>
+								<th scope="col"></th>
+							</tr>
 					</tbody>
 				</table>
 			</div>
 	    </div>
 	  </div>
 	@endforeach  
-	  <div class="card">
-	    <div class="card-header" id="headingTwo">
-	      <h5 class="mb-0">
-	        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-	          Pessoa 2
-	        </button>
-	      </h5>
-	    </div>
-	    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-	      <div class="card-body">
-	        <table class="table">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col"></th>
-						<th scope="col">Last</th>
-						<th scope="col">Handle</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-					</tr>
-				</tbody>
-			</table>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="card">
-	    <div class="card-header" id="headingThree">
-	      <h5 class="mb-0">
-	        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-	          Pessoa 3
-	        </button>
-	      </h5>
-	    </div>
-	    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-	      <div class="card-body">
-	        <table class="table">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col"></th>
-						<th scope="col">Last</th>
-						<th scope="col">Handle</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-					</tr>
-				</tbody>
-			</table>
-	      </div>
-	    </div>
-	  </div>
 	</div>
 
 
