@@ -11,12 +11,19 @@
 |
 */
 
+/* -- Vendas -- */
 Route::get('/', 'VendasController@index')->name('vendas');
-Route::get('/clientes', 'VendasController@clientes')->name('clientes');
-Route::get('/produtos', 'VendasController@produtos')->name('produtos');
-
 Route::post('/', 'VendasController@storeVendas');
+Route::delete('/remover/{id}', 'VendasController@removerVendas');
+
+
+/* -- Clientes -- */
+Route::get('/clientes', 'VendasController@clientes')->name('clientes');
 Route::post('/clientes', 'VendasController@storeClientes');
+
+
+/* -- Produtos -- */
+Route::get('/produtos', 'VendasController@produtos')->name('produtos');
 Route::post('/produtos', 'VendasController@storeProdutos');
 
 

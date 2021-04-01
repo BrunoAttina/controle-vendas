@@ -18,7 +18,7 @@ class CriarTabelaVendas extends Migration
             $table->integer('fkCliente');
             $table->integer('fkProduto');
             $table->integer('qtd');
-            $table->float('valor');
+            $table->double('valor', 8, 2);
             $table->timestamps();
         });
     }

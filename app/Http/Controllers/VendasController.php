@@ -39,6 +39,20 @@ class VendasController extends Controller
 		return redirect()->route('vendas');
 	}
 
+	public function removerVendas(Request $request)
+    {
+        Venda::destroy($request->id);
+        $request->session()->flash('mensagem',"Série removida com sucesso!");
+
+        return redirect()->route('vendas');
+    }
+
+
+
+
+
+
+
 
 
 	public function clientes(Request $request){

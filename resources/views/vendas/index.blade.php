@@ -46,6 +46,7 @@
 	<?php $contagem = 0;?>
 	@foreach($clientes as $cliente)
 	<?php $contagem++;?>
+	<?php $valorTotal = 0;?>
 	  <div class="card">
 	    <div class="card-header" id="heading{{$contagem}}">
 	      <h5 class="mb-0">
@@ -73,14 +74,15 @@
 						@foreach($vendas as $venda)
 							@if($venda->fkCliente == $cliente->id)
 							<tr>
-								<td>{{$venda->created_at}}</th>
+								<td>{{$venda->created_at}}</td>
 								@foreach($produtos as $produto)
 									@if($venda->fkProduto == $produto->id)
 										<td>{{$produto->nome}}</td>
 									@endif
 								@endforeach
-								<td>{{$venda->qtd}}</th>
-								<td>{{$venda->valor}}</td>
+								<td>{{$venda->qtd}}</td>
+								<td>{{$valor = (float) $venda->valor}}</td>
+								<?php $valorTotal += $valor;?>
 								<td></td>
 								<td>
 									<form method="post" action="/remover/{{$venda->id}}" 
@@ -97,7 +99,7 @@
 								<th scope="col"></th>
 								<th scope="col"></th>
 								<th scope="col"></th>
-								<th scope="col">Valor total: R$0,00</th>
+								<th scope="col">Valor total: R$ {{$valorTotal}}</th>
 								<th scope="col"></th>
 							</tr>
 					</tbody>
