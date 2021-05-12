@@ -15,11 +15,18 @@ class CriarTabelaVendas extends Migration
     {
         Schema::create('Vendas', function (Blueprint $table) {
             $table->increments('id');
+
             $table->integer('fkCliente');
+            $table->foreign('fkCliente')->references('id')->on('clientes');
+
             $table->integer('fkProduto');
+            $table->foreign('fkProduto')->references('id')->on('produtos');
+
             $table->integer('qtd');
             $table->double('valor', 8, 2);
             $table->timestamps();
+
+
         });
     }
 

@@ -12,5 +12,8 @@ class Cliente extends Model
 {
 	//public $timestamps = false;
    
-    
+    public function vendas()
+    {
+    	 return $this->hasMany(Venda::class);
+    }
 }
