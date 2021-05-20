@@ -32,9 +32,23 @@ class VendasController extends Controller
 		$vendas->fkProduto = $produto;
 		$vendas->qtd = $qtd;
 		$vendas->valor = $valor;
+		$vendas->pagto = '';
 		$vendas->save();
 
 		$request->session()->flash('mensagem',"Venda {$vendas->id} criada com sucesso {$vendas->nome}");
+
+		return redirect()->route('vendas');
+	}
+
+	public function updatePagto(Request $request)
+	{
+		$idVenda = $request->id;
+		$pagto = $request->pagto;
+		$vendas = Venda::find($idVenda);
+		$vendas->pagto = $pagto;
+		$vendas->save();
+
+		$request->session()->flash('mensagem',"Venda atualizada com sucesso.");
 
 		return redirect()->route('vendas');
 	}

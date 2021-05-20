@@ -65,7 +65,7 @@
 							<th scope="col">Produto</th>
 							<th scope="col">Quantidade</th>
 							<th scope="col">Valor</th>
-							<th scope="col">?</th>
+							<th scope="col">Pagto</th>
 							<th scope="col"></th>
 
 						</tr>
@@ -83,7 +83,19 @@
 								<td>{{$venda->qtd}}</td>
 								<td>{{$valor = (float) $venda->valor}}</td>
 								<?php $valorTotal += $valor;?>
-								<td></td>
+								<td>
+									@if($venda->pagto == '')
+										<form method="post" action="/updatePagto/{{$venda->id}}" class="form-inline">
+											@csrf
+											@method("PUT")
+											<input type="text" class="form-control" placeholder="" name="pagto">
+											<button type="submit" class="btn btn-primary"><i class="fas fa-check"></i></button>
+										</form>
+									@endif
+									@if($venda->pagto != '')
+										{{$venda->pagto}}
+									@endif
+								</td>
 								<td>
 									<form method="post" action="/remover/{{$venda->id}}" 
 										onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($venda->nome) }}?')"> <!--addslashes função que faz ignorar " ' " no nome-->

@@ -14,6 +14,7 @@
 /* -- Vendas -- */
 Route::get('/', 'VendasController@index')->name('vendas');
 Route::post('/', 'VendasController@storeVendas');
+Route::put('/updatePagto/{id}', 'VendasController@updatePagto');
 Route::delete('/remover/{id}', 'VendasController@removerVendas');
 
 

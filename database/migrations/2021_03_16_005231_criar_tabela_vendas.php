@@ -24,6 +24,7 @@ class CriarTabelaVendas extends Migration
 
             $table->integer('qtd');
             $table->double('valor', 8, 2);
+            $table->string('pagto');
             $table->timestamps();
 
 
